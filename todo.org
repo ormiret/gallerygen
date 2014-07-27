@@ -1,0 +1,10 @@
+* Check if shrunk version exists before making it
+Currently makes the shrunk version every time even if it's already there. This is a bit of a wast of cycles. 
+Should probably have some checking of age as well as existence to regen is original is younger than shrunk version. 
+* Tidy up the generated page
+Could do with a bit of padding for body?
+Shouldn't have lines in there from the links.
+Could do with actually lining up edges. 
+Might need to find someone who actually knows what they're doing with web design to take a look at it...
+* Support for different ratio images in a row
+I'd like to mix wide and tall images in a row and have them match height and have the widths figured out appropriately. Needs a quite different approach to current one to do that. 

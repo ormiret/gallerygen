@@ -1,0 +1,20 @@
+<html>
+<head>
+<title>{{ title }}</title>
+<link href="image.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+{% for row in rows %}
+<div class="{{ row.cl }}">
+{% for img in row.imgs %}
+<a href="{{ img.1 }}">
+<img src="{{ img.0 }}">
+</a>
+{% endfor %}
+</div>
+{% endfor %}
+
+</body>
+</html>
