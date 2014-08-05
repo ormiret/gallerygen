@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import jinja2
 import Image
 import os, sys
@@ -9,11 +11,12 @@ def shrunkname(name, size):
     
 
 def shrink(image, size=1920):
+    print "Skrinking ", image
     im = Image.open(image)
     if im.size[0] > size:
         newname = shrunkname(image, size)
         im.thumbnail((size,size), Image.ANTIALIAS)
-        im.save(newname, "JPEG")
+        im.save(newname, "JPEG", quality=100, subsampling=0)
         return newname
     else:
         return image
@@ -28,12 +31,15 @@ def get_class(num):
         return "two"
     elif num == 3:
         return "three"
+    elif num == 4:
+        return "four"
     else:
         return "more"
 
 MAX_WIDTH = 1920 # probably wide enough
 class Row:
     def __init__(self, imgs):
+        print "Making row from: ", imgs
         self.cl = get_class(len(imgs))
         self.imgs = [(shrink(img, MAX_WIDTH/len(imgs)), img)
                      for img in imgs]
@@ -41,8 +47,10 @@ def main():
     #get image list
     with open(sys.argv[1]) as listf:
         lines = listf.readlines()
-    lines = [line.split(",") for line in lines]
-    lines = [[img.strip() for img in line] for line in lines]
+    print "Read gallery definition."
+    lines = [line.split(",") for line in lines if not line[0] == "#"]
+    lines = [[img.strip() for img in line] for line in lines]    
+    print "Split up lines."
     #prep images
     rows = [Row(line) for line in lines]
     #render page
@@ -65,7 +73,9 @@ def main():
     shutil.copy(os.path.join(os.path.dirname(sys.argv[0]),
                              "image.css"),
                 ".")
-                
+    shutil.copy(os.path.join(os.path.dirname(sys.argv[0]),
+                             "jquery-1.11.1.min.js"),
+                ".")
     print "Done."
 
 if __name__=="__main__":
