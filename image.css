@@ -1,31 +1,19 @@
-.one, .two, .three .four{
-    width: 100%;
-    line-height: 0;
-
-}
-
-.one img{
-    width: 100%;
-}
-
-.two img{
-    width: 50%;
-}
-
-.three img{
-    width: 33.3%
-}
-
-.four img{
-    width: 25%
-}
-
 img {
     margin:0px;
     padding: 0px;
     border: 0px;
+    width:100%;
+}
+
+.flrow {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    width: 100%
+}
+
+.box{
     display: block;
-    float: left;
 }
 
 div {
@@ -35,6 +23,7 @@ div {
     text-align: justify;
     line-height: 0;
     clear: both;
+    display: block;
 }
 
 * { 

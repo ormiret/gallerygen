@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import jinja2
-import Image
+from PIL import Image
 import os, sys
 import shutil
 
@@ -11,7 +11,7 @@ def shrunkname(name, size):
     
 
 def shrink(image, size=1920):
-    print "Skrinking ", image
+    print("Skrinking ", image)
     im = Image.open(image)
     if im.size[0] > size:
         newname = shrunkname(image, size)
@@ -21,36 +21,24 @@ def shrink(image, size=1920):
     else:
         return image
                 
-
-
-def get_class(num):
-    # might be tidier done with a dict?
-    if num == 1:
-        return "one"
-    elif num == 2:
-        return "two"
-    elif num == 3:
-        return "three"
-    elif num == 4:
-        return "four"
-    else:
-        return "more"
+def ratio(image, scale=10000):
+    im = Image.open(image)
+    return int(im.size[0]/im.size[1]*scale)
 
 MAX_WIDTH = 1920 # probably wide enough
 class Row:
     def __init__(self, imgs):
-        print "Making row from: ", imgs
-        self.cl = get_class(len(imgs))
-        self.imgs = [(shrink(img, MAX_WIDTH/len(imgs)), img)
+        print("Making row from: ", imgs)
+        self.imgs = [(shrink(img, MAX_WIDTH/len(imgs)), img, ratio(img))
                      for img in imgs]
 def main():
     #get image list
     with open(sys.argv[1]) as listf:
         lines = listf.readlines()
-    print "Read gallery definition."
+    print("Read gallery definition.")
     lines = [line.split(",") for line in lines if not line[0] == "#"]
     lines = [[img.strip() for img in line] for line in lines]    
-    print "Split up lines."
+    print("Split up lines.")
     #prep images
     rows = [Row(line) for line in lines]
     #render page
@@ -76,7 +64,7 @@ def main():
     shutil.copy(os.path.join(os.path.dirname(sys.argv[0]),
                              "jquery-1.11.1.min.js"),
                 ".")
-    print "Done."
+    print("Done.")
 
 if __name__=="__main__":
     main()

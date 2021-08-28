@@ -6,35 +6,39 @@
 </head>
 
 <body>
-<script src="jquery-1.11.1.min.js"></script>
-<script>
-var set_margins = function (){
-var h = $(window).height();
-var w = $(window).width();
-if (w/h > 1.0) {
-var spare = (w-h)/w * 100;
-$("body").animate({ marginLeft : spare*.35 + "%"});
-$("body").animate({ marginRight : spare*.35 + "%"});
-} else {
-$("body").animate({ marginLeft : "1%"});
-$("body").animate({ marginRight : "1%"});
+  <script src="jquery-1.11.1.min.js"></script>
+  <script>
+    var set_margins = function (){
+    var h = $(window).height();
+    var w = $(window).width();
+    if (w/h > 1.0) {
+    var spare = (w-h)/w * 100;
+    $("body").animate({ marginLeft : spare*.35 + "%"});
+    $("body").animate({ marginRight : spare*.35 + "%"});
+    } else {
+    $("body").animate({ marginLeft : "1%"});
+    $("body").animate({ marginRight : "1%"});
+    
+    }
+    };
 
-}
-};
+    $(window).resize(set_margins);
+    $(document).ready(set_margins);
+  </script>
 
-$(window).resize(set_margins);
-$(document).ready(set_margins);
-</script>
-
-{% for row in rows %}
-<div class="{{ row.cl }}">
-{% for img in row.imgs %}
-<a href="{{ img.1 }}">
-<img src="{{ img.0 }}">
-</a>
-{% endfor %}
-</div>
-{% endfor %}
+  {% for row in rows %}
+    <div class="box">
+      <div class="flrow">
+        {% for img in row.imgs %}
+          <div style="flex-basis:0; flex-grow:{{ img.2 }}">
+            <a href="{{ img.1 }}">
+              <img src="{{ img.0 }}">
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
 
 </body>
 </html>
