@@ -3,7 +3,5 @@ Currently makes the shrunk version every time even if it's already there. This i
 Should probably have some checking of age as well as existence to regen is original is younger than shrunk version. 
 * Autoscrolling
 I'd like to add autoscrolling of the gallery so it can be put on a screen and left running. Would have rows moved to the end after they are scrolled off the top of the screen so that it will scroll infinitely (I expect if I do that naively it will screw up the scroll position as everything else jumps up but I'm sure I can find some reference stuff for infinite scrolling and then make that autoscrolling).
-* Calculate margins in CSS
-Currently have some javascript to put in margins if window is wider than it is tall. I think this should be doable in CSS...
 * Zoom out
 I quite like the "zoomed out" version you get when window is a lot taller than it is wide, could get the same effect by setting quite large margins. Could add something to toggle that. 
