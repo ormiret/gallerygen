@@ -61,9 +61,6 @@ def main():
     shutil.copy(os.path.join(os.path.dirname(sys.argv[0]),
                              "image.css"),
                 ".")
-    shutil.copy(os.path.join(os.path.dirname(sys.argv[0]),
-                             "jquery-1.11.1.min.js"),
-                ".")
     print("Done.")
 
 if __name__=="__main__":
